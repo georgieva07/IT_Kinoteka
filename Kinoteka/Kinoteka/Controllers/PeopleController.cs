@@ -12,7 +12,7 @@ namespace Kinoteka.Controllers
 {
     public class PeopleController : Controller
     {
-        private ShowContext db = new ShowContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: People
         public ActionResult Index()

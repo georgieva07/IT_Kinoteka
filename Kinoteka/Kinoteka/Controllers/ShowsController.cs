@@ -10,10 +10,12 @@ using Kinoteka.Models;
 
 namespace Kinoteka.Controllers
 {
+    [Authorize(Roles ="Administrator, Ediotr")]
     public class ShowsController : Controller
     {
-        private ShowContext db = new ShowContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
+        [AllowAnonymous]
         // GET: Shows
         public ActionResult Index()
         {
@@ -90,24 +92,8 @@ namespace Kinoteka.Controllers
         }
 
         // GET: Shows/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Show show = db.Show.Find(id);
-            if (show == null)
-            {
-                return HttpNotFound();
-            }
-            return View(show);
-        }
 
-        // POST: Shows/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
             Show show = db.Show.Find(id);
             db.Show.Remove(show);
@@ -124,23 +110,23 @@ namespace Kinoteka.Controllers
             base.Dispose(disposing);
         }
 
-		public ActionResult AddGenre(int id)
-		{
-			ShowGenre model = new ShowGenre();
-			model.showId = id;
-			model.show = db.Show.Find(id);
-			model.genres = db.Genre.ToList();
-			return View(model);
-		} 
+        public ActionResult AddGenre(int id)
+        {
+            ShowGenre model = new ShowGenre();
+            model.showId = id;
+            model.show = db.Show.Find(id);
+            model.genres = db.Genre.ToList();
+            return View(model);
+        }
 
-		[HttpPost]
-		public ActionResult AddGenre(ShowGenre model)
-		{
-			var genre = db.Genre.FirstOrDefault(m=>m.id==model.genreId);
-			var show = db.Show.FirstOrDefault(m => m.id == model.showId);
-			show.genres.Add(genre);
-			db.SaveChanges();
-			return View("Index", db.Show.ToList());
-		}
-	}
+        [HttpPost]
+        public ActionResult AddGenre(ShowGenre model)
+        {
+            var genre = db.Genre.FirstOrDefault(m => m.id == model.genreId);
+            var show = db.Show.FirstOrDefault(m => m.id == model.showId);
+            show.genres.Add(genre);
+            db.SaveChanges();
+            return View("Index", db.Show.ToList());
+        }
+    }
 }

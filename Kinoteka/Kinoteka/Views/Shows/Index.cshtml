@@ -48,11 +48,18 @@
 				<td>
 					@Html.DisplayFor(modelItem => item.rating)
 				</td>
-				<td>
-					@Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-					@Html.ActionLink("See More", "Details", new { id = item.id }) |
-					@Html.ActionLink("Delete", "Delete", new { id = item.id })
-				</td>
+                <td>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                         @Html.ActionLink("Edit", "Edit", new { id = item.id }) 
+                    }
+
+                    @Html.ActionLink("See More", "Details", new { id = item.id }) |
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <a class="btn-link js-delete" data-id="@item.id">Delete</a>
+                    }
+                </td>
 			</tr>
 		}
 	</tbody>
@@ -79,4 +86,24 @@
         });
 
 	</script>
+
+    <script>
+        var table = $("#shows").DataTable();
+        $("#shows .js-delete").click(function () {
+            var button = $(this);
+            bootbox.confirm("Are you sure you want to delete this movie?",
+                function (result) {
+                    if (result) {
+                        $.ajax({
+                            method: "GET",
+                            url: "/Shows/Delete/" + button.attr("data-id"),
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                })
+        })
+ 
+    </script>
 }

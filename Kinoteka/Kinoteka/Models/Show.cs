@@ -15,7 +15,8 @@ namespace Kinoteka.Models
 		public String title { get; set; }
 		[Display(Name = "Synopsis")]
 		public String description { get; set; }
-		public String image { get; set; }
+        [Display(Name = "Image")]
+        public String image { get; set; }
 		[Display(Name = "Release date")]
 		public String released_date { get; set; }
 		[Required]
@@ -30,7 +31,8 @@ namespace Kinoteka.Models
 
 		public virtual ICollection<Person> directors { get; set; }
 		public virtual ICollection<Person> cast { get; set; }
-		public virtual ICollection<Genre> genres { get; set; }
+        [Display(Name = "Genre")]
+        public virtual ICollection<Genre> genres { get; set; }
 
 		public Show()
 		{
