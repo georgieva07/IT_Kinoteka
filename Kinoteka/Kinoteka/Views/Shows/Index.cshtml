@@ -1,69 +1,82 @@
 ﻿@model IEnumerable<Kinoteka.Models.Show>
 
 @{
-    ViewBag.Title = "Index";
+				/**/
+
+				ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Shows Available</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+	@Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.released_date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.rating)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.play_link)
-        </th>
-        <th></th>
-    </tr>
+<table class="table" id="shows">
+	<thead>
+		<tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.image)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.released_date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.rating)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.play_link)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+			<th>
+				@Html.DisplayNameFor(model => model.image)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.title)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.released_date)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.rating)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+
+	<tbody>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					<img src="@item.image" style="max-width:200px">
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.title)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.released_date)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.rating)
+				</td>
+				<td>
+					@Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+					@Html.ActionLink("See More", "Details", new { id = item.id }) |
+					@Html.ActionLink("Delete", "Delete", new { id = item.id })
+				</td>
+			</tr>
+		}
+	</tbody>
 
 </table>
+
+
+@section scripts{
+	<script>
+        $(document).on("ready", function () {
+            var table = $("#shows").DataTable();
+            $(".js-delete").on("click", function () {
+                alert("Raboti click");
+                var button = $(this);
+                $.ajax({
+                    //druga opcija:
+                    url: "/Albums/Delete/" + button.attr("data-album-id"),
+                    method: "GET",
+                    success: function () {
+                        table.row(button.parents("tr")).remove().draw();
+                    }
+                });
+            });
+        });
+
+	</script>
+}

@@ -1,0 +1,22 @@
+﻿@model Kinoteka.Models.ShowGenre
+
+@{
+	ViewBag.Title = "AddGenre";
+}
+
+<h2>Add the genre for the following movie:</h2>
+<h4>@Model.show.title</h4>
+
+@using (Html.BeginForm("AddGenre", "Shows"))
+{
+	<div class="form-group">
+		@Html.DropDownListFor(g => g.genreId, new SelectList(Model.genres, "id", "name"), new { @class = "form-control" })
+
+		@Html.HiddenFor(s => s.showId)
+	</div>
+
+	<div class="form-group">
+		<button type="submit">Add genre to the Show</button>
+	</div>
+
+}

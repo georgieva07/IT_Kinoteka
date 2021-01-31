@@ -10,9 +10,20 @@ namespace Kinoteka.Models
     {
         [Key]
         public int id { get; set; }
-        public String name { get; set; }
+		[Required]
+		[Display(Name = "Name")]
+		public String name { get; set; }
         public String image { get; set; }
-        public String role { get; set; } //actor, host
+		[Required]
+		[Display(Name = "Role")]
+		public String role { get; set; } //actor, host
+		public virtual ICollection<Show> shows { get; set; }
 
-    }
+		public Person()
+		{
+			this.shows = new List<Show>();
+		}
+
+
+	}
 }

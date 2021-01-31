@@ -10,6 +10,8 @@ namespace Kinoteka.Models
     {
         [Key]
         public int id { get; set; }
-        public String name { get; set; }
+		[Required]
+		[Display(Name = "Genre")]
+		public String name { get; set; }
     }
 }

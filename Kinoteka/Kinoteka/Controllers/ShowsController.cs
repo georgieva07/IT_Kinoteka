@@ -123,5 +123,24 @@ namespace Kinoteka.Controllers
             }
             base.Dispose(disposing);
         }
-    }
+
+		public ActionResult AddGenre(int id)
+		{
+			ShowGenre model = new ShowGenre();
+			model.showId = id;
+			model.show = db.Show.Find(id);
+			model.genres = db.Genre.ToList();
+			return View(model);
+		} 
+
+		[HttpPost]
+		public ActionResult AddGenre(ShowGenre model)
+		{
+			var genre = db.Genre.FirstOrDefault(m=>m.id==model.genreId);
+			var show = db.Show.FirstOrDefault(m => m.id == model.showId);
+			show.genres.Add(genre);
+			db.SaveChanges();
+			return View("Index", db.Show.ToList());
+		}
+	}
 }
