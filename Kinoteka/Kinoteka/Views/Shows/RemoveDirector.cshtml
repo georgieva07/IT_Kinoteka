@@ -1,0 +1,25 @@
+﻿@model Kinoteka.Models.ShowDirectors
+
+@{
+				/**/
+
+				ViewBag.Title = "RemoveDirector";
+}
+
+
+<h2>Remove a director for the following movie:</h2>
+<h4>@Model.show.title</h4>
+
+@using (Html.BeginForm("RemoveDirector", "Shows"))
+{
+	<div class="form-group">
+		@Html.DropDownListFor(d => d.directorId, new SelectList(Model.show.directors, "id", "name"), new { @class = "form-control" })
+
+		@Html.HiddenFor(s => s.showId)
+	</div>
+
+	<div class="form-group">
+		<button type="submit">Remove movie director</button>
+	</div>
+
+}

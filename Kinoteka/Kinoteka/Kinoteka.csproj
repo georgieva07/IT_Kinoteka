@@ -204,9 +204,9 @@
     <Compile Include="Migrations\202101312136195_initial.Designer.cs">
       <DependentUpon>202101312136195_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202102021709301_final.cs" />
-    <Compile Include="Migrations\202102021709301_final.Designer.cs">
-      <DependentUpon>202102021709301_final.cs</DependentUpon>
+    <Compile Include="Migrations\202102022026576_final.cs" />
+    <Compile Include="Migrations\202102022026576_final.Designer.cs">
+      <DependentUpon>202102022026576_final.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -546,6 +546,9 @@
     <Content Include="Views\Directors\Index.cshtml" />
     <Content Include="Views\Shows\AddCastMember.cshtml" />
     <Content Include="Views\Shows\AddDirector.cshtml" />
+    <Content Include="Views\Shows\RemoveGenre.cshtml" />
+    <Content Include="Views\Shows\RemoveDirector.cshtml" />
+    <Content Include="Views\Shows\RemoveCastMember.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -567,8 +570,8 @@
     <EmbeddedResource Include="Migrations\202101312136195_initial.resx">
       <DependentUpon>202101312136195_initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202102021709301_final.resx">
-      <DependentUpon>202102021709301_final.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202102022026576_final.resx">
+      <DependentUpon>202102022026576_final.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

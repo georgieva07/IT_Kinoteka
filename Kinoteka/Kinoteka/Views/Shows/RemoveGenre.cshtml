@@ -1,0 +1,23 @@
+﻿@model Kinoteka.Models.ShowGenre
+
+@{
+	ViewBag.Title = "RemoveGenre";
+}
+
+
+<h2>Remove a genre for the following movie:</h2>
+<h4>@Model.show.title</h4>
+
+@using (Html.BeginForm("RemoveGenre", "Shows"))
+{
+	<div class="form-group">
+		@Html.DropDownListFor(g => g.genreId, new SelectList(Model.show.genres, "id", "name"), new { @class = "form-control" })
+
+		@Html.HiddenFor(s => s.showId)
+	</div>
+
+	<div class="form-group">
+		<button type="submit">Remove the genre from the Show</button>
+	</div>
+
+}

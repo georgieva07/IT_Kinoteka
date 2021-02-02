@@ -32,7 +32,8 @@ namespace Kinoteka.Controllers
             {
                 return HttpNotFound();
             }
-            return View(genre);
+
+			return View(genre);
         }
 
         // GET: Genres/Create

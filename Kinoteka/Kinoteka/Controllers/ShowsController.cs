@@ -169,5 +169,65 @@ namespace Kinoteka.Controllers
 			db.SaveChanges();
 			return RedirectToAction("Details/" + model.showId, "Shows", new { area = "" });
 		}
+
+		 public ActionResult RemoveGenre(int id)
+        {
+            ShowGenre model = new ShowGenre();
+            model.showId = id;
+            model.show = db.Show.Find(id);
+            model.genres = db.Genre.ToList();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult RemoveGenre(ShowGenre model)
+        {
+			var genre = db.Genre.FirstOrDefault(m => m.id == model.genreId);
+			var show = db.Show.FirstOrDefault(m => m.id == model.showId);
+			show.genres.Remove(genre);
+			genre.shows.Remove(show);
+			db.SaveChanges();
+			return RedirectToAction("Details/"+model.showId, "Shows", new { area = "" });
+		}
+		
+		public ActionResult RemoveCastMember(int id)
+		{
+			ShowCast model = new ShowCast();
+			model.showId = id;
+			model.show = db.Show.Find(id);
+			model.cast = db.Actors.ToList();
+			return View(model);
+		}
+
+		[HttpPost]
+		public ActionResult RemoveCastMember(ShowCast model)
+		{
+			var actor = db.Actors.FirstOrDefault(m => m.id == model.actorId);
+			var show = db.Show.FirstOrDefault(m => m.id == model.showId);
+			show.cast.Remove(actor);
+			actor.shows.Remove(show);
+			db.SaveChanges();
+			return RedirectToAction("Details/" + model.showId, "Shows", new { area = "" });
+		}
+
+		public ActionResult RemoveDirector(int id)
+		{
+			ShowDirectors model = new ShowDirectors();
+			model.showId = id;
+			model.show = db.Show.Find(id);
+			model.directors = db.Directors.ToList();
+			return View(model);
+		}
+
+		[HttpPost]
+		public ActionResult RemoveDirector(ShowDirectors model)
+		{
+			var director = db.Directors.FirstOrDefault(m => m.id == model.directorId);
+			var show = db.Show.FirstOrDefault(m => m.id == model.showId);
+			show.directors.Remove(director);
+			director.shows.Remove(show);
+			db.SaveChanges();
+			return RedirectToAction("Details/" + model.showId, "Shows", new { area = "" });
+		}
 	}
 }

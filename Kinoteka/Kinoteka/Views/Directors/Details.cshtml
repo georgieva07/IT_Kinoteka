@@ -57,28 +57,12 @@
 </div>
 <p>
 	@Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-	@Html.ActionLink("Back to List", "Index")
+	@Html.ActionLink("Back to Directors List", "Index")
 </p>
 
 
 @section scripts{
 	<script>
         var table = $("#shows").DataTable();
-        $("#shows .js-delete").click(function () {
-            var button = $(this);
-            bootbox.confirm("Are you sure you want to delete this movie?",
-                function (result) {
-                    if (result) {
-                        $.ajax({
-                            method: "GET",
-                            url: "/Shows/Delete/" + button.attr("data-id"),
-                            success: function () {
-                                table.row(button.parents("tr")).remove().draw();
-                            }
-                        });
-                    }
-                })
-        })
-
-	</script>
+    </script>
 }

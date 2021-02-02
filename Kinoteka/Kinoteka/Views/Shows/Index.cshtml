@@ -27,6 +27,12 @@
 			<th>
 				@Html.DisplayNameFor(model => model.rating)
 			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.directors)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.cast)
+			</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -35,32 +41,48 @@
 
 		@foreach (var item in Model)
 		{
-			<tr>
-				<td>
-					<img src="@item.image" style="max-width:200px">
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.title)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.released_date)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.rating)
-				</td>
-                <td>
-                    @if (User.IsInRole("Administrator"))
-                    {
-                         @Html.ActionLink("Edit", "Edit", new { id = item.id }) 
-                    }
+		<tr>
+			<td>
+				<img src="@item.image" style="max-width:200px">
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.title)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.released_date)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.rating)
+			</td>
+			<td>
+				<ul style="list-style-type: none;">
+					@foreach (var director in item.directors)
+					{
+						<li><a href="/Directors/Details/@director.id">@director.name</a></li>
+					}
+				</ul>
+			</td>
+			<td>
+				<ul style="list-style-type: none;">
+					@foreach (var actor in item.cast)
+					{
+						<li><a href="/Actors/Details/@actor.id">@actor.name</a></li>
+					}
+				</ul>
+			</td>
+			<td>
+				@if (User.IsInRole("Administrator"))
+				{
+					@Html.ActionLink("Edit", "Edit", new { id = item.id })
 
-                    @Html.ActionLink("Watch Movie", "Details", new { id = item.id }) |
-                    @if (User.IsInRole("Administrator"))
-                    {
-                        <a class="btn-link js-delete" data-id="@item.id">Delete</a>
-                    }
-                </td>
-			</tr>
+				} |
+				@Html.ActionLink("See More", "Details", new { id = item.id }) |
+				@if (User.IsInRole("Administrator"))
+				{
+					<a class="btn-link js-delete" data-id="@item.id">Delete</a>
+				}
+			</td>
+		</tr>
 		}
 	</tbody>
 
