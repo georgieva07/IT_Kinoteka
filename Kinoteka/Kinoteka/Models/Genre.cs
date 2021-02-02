@@ -13,5 +13,12 @@ namespace Kinoteka.Models
 		[Required]
 		[Display(Name = "Genre")]
 		public String name { get; set; }
-    }
+		[Display(Name = "Shows")]
+		public List<Show> shows { get; set; }
+		
+		public Genre()
+		{
+			shows = new List<Show>();
+		}
+	}
 }

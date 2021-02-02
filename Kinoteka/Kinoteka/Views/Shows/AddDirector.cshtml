@@ -1,0 +1,23 @@
+﻿@model Kinoteka.Models.ShowDirectors
+
+@{
+	ViewBag.Title = "AddDirector";
+}
+
+<h2>Add a director for the following movie:</h2>
+<h4>@Model.show.title</h4>
+
+@using (Html.BeginForm("AddDirector", "Shows"))
+{
+	<div class="form-group">
+		@Html.DropDownListFor(d => d.directorId, new SelectList(Model.directors, "id", "name"), new { @class = "form-control" })
+
+		@Html.HiddenFor(s => s.showId)
+	</div>
+
+	<div class="form-group">
+		<button type="submit">Add movie director</button>
+	</div>
+
+}
+

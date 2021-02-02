@@ -122,11 +122,52 @@ namespace Kinoteka.Controllers
         [HttpPost]
         public ActionResult AddGenre(ShowGenre model)
         {
-            var genre = db.Genre.FirstOrDefault(m => m.id == model.genreId);
-            var show = db.Show.FirstOrDefault(m => m.id == model.showId);
-            show.genres.Add(genre);
-            db.SaveChanges();
-            return View("Index", db.Show.ToList());
-        }
-    }
+			var genre = db.Genre.FirstOrDefault(m => m.id == model.genreId);
+			var show = db.Show.FirstOrDefault(m => m.id == model.showId);
+			show.genres.Add(genre);
+			genre.shows.Add(show);
+			db.SaveChanges();
+			return RedirectToAction("Details/"+model.showId, "Shows", new { area = "" });
+		}
+
+		public ActionResult AddCastMember(int id)
+		{
+			ShowCast model = new ShowCast();
+			model.showId = id;
+			model.show = db.Show.Find(id);
+			model.cast = db.Actors.ToList();
+			return View(model);
+		}
+
+		[HttpPost]
+		public ActionResult AddCastMember(ShowCast model)
+		{
+			var actor = db.Actors.FirstOrDefault(m => m.id == model.actorId);
+			var show = db.Show.FirstOrDefault(m => m.id == model.showId);
+			show.cast.Add(actor);
+			actor.shows.Add(show);
+			db.SaveChanges();
+			return RedirectToAction("Details/" + model.showId, "Shows", new { area = "" });
+		}
+
+		public ActionResult AddDirector(int id)
+		{
+			ShowDirectors model = new ShowDirectors();
+			model.showId = id;
+			model.show = db.Show.Find(id);
+			model.directors = db.Directors.ToList();
+			return View(model);
+		}
+
+		[HttpPost]
+		public ActionResult AddDirector(ShowDirectors model)
+		{
+			var director = db.Directors.FirstOrDefault(m => m.id == model.directorId);
+			var show = db.Show.FirstOrDefault(m => m.id == model.showId);
+			show.directors.Add(director);
+			director.shows.Add(show);
+			db.SaveChanges();
+			return RedirectToAction("Details/" + model.showId, "Shows", new { area = "" });
+		}
+	}
 }

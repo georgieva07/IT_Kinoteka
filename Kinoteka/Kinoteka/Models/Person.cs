@@ -24,6 +24,5 @@ namespace Kinoteka.Models
 			this.shows = new List<Show>();
 		}
 
-
 	}
 }

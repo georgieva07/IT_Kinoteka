@@ -36,5 +36,9 @@ namespace Kinoteka.Models
         {
             return new ApplicationDbContext();
         }
-    }
+
+		public System.Data.Entity.DbSet<Kinoteka.Models.Actor> Actors { get; set; }
+
+		public System.Data.Entity.DbSet<Kinoteka.Models.Director> Directors { get; set; }
+	}
 }

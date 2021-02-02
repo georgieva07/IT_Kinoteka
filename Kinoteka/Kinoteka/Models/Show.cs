@@ -23,21 +23,19 @@ namespace Kinoteka.Models
 		[Display(Name = "Rating")]
 		public decimal rating { get; set; }
 		[Required]
-		[Display(Name = "Type of show")]
-		public String type { get; set; } //movie, series, tv show
-		[Required]
 		[Display(Name = "Play")]
 		public String play_link { get; set; }
-
-		public virtual ICollection<Person> directors { get; set; }
-		public virtual ICollection<Person> cast { get; set; }
+		[Display(Name = "Directed by")]
+		public virtual ICollection<Director> directors { get; set; }
+		[Display(Name = "Stars")]
+		public virtual ICollection<Actor> cast { get; set; }
         [Display(Name = "Genre")]
         public virtual ICollection<Genre> genres { get; set; }
 
 		public Show()
 		{
-			this.directors = new List<Person>();
-			this.cast = new List<Person>();
+			this.directors = new List<Director>();
+			this.cast = new List<Actor>();
 			this.genres = new List<Genre>();
 		}
 

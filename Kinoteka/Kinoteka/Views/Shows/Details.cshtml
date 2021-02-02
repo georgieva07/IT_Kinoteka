@@ -23,6 +23,32 @@
 				}
 			</ul>
 		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.directors)
+		</dt>
+		<dd>
+			<ul>
+				@foreach (var director in Model.directors)
+				{
+					<li><a href="/Actors/Details/@director.id">@director.name</a></li>
+				}
+			</ul>
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.cast)
+		</dt>
+		<dd>
+			<ul>
+				@foreach (var actor in Model.cast)
+				{
+					<li><a href="/Actors/Details/@actor.id">@actor.name</a></li>
+				}
+			</ul>
+		</dd>
+
+
 		<dt>
 			@Html.DisplayNameFor(model => model.description)
 		</dt>
@@ -48,25 +74,19 @@
 		</dd>
 
 		<dt>
-			@Html.DisplayNameFor(model => model.type)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor(model => model.type)
-		</dd>
-
-		<dt>
 			@Html.DisplayNameFor(model => model.play_link)
 		</dt>
 
 		<dd>
-            <iframe width="560" height="315" src="@Model.play_link" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<iframe width="560" height="315" src="@Model.play_link" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 		</dd>
 
 	</dl>
 </div>
 
 <a href="/Shows/AddGenre/@Model.id">Add a genre to this movie</a>
+<a href="/Shows/AddDirector/@Model.id">Add a director</a>
+<a href="/Shows/AddCastMember/@Model.id">Add a cast member</a>
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |

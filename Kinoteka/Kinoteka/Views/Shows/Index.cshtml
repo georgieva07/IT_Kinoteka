@@ -54,7 +54,7 @@
                          @Html.ActionLink("Edit", "Edit", new { id = item.id }) 
                     }
 
-                    @Html.ActionLink("See More", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Watch Movie", "Details", new { id = item.id }) |
                     @if (User.IsInRole("Administrator"))
                     {
                         <a class="btn-link js-delete" data-id="@item.id">Delete</a>
@@ -68,25 +68,6 @@
 
 
 @section scripts{
-	<script>
-        $(document).on("ready", function () {
-            var table = $("#shows").DataTable();
-            $(".js-delete").on("click", function () {
-                alert("Raboti click");
-                var button = $(this);
-                $.ajax({
-                    //druga opcija:
-                    url: "/Albums/Delete/" + button.attr("data-album-id"),
-                    method: "GET",
-                    success: function () {
-                        table.row(button.parents("tr")).remove().draw();
-                    }
-                });
-            });
-        });
-
-	</script>
-
     <script>
         var table = $("#shows").DataTable();
         $("#shows .js-delete").click(function () {
