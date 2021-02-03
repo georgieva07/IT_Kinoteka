@@ -10,10 +10,11 @@ using Kinoteka.Models;
 
 namespace Kinoteka.Controllers
 {
+    [Authorize(Roles = "Administrator, Editor")]
     public class GenresController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        [AllowAnonymous]
         // GET: Genres
         public ActionResult Index()
         {
@@ -91,24 +92,8 @@ namespace Kinoteka.Controllers
         }
 
         // GET: Genres/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Genre genre = db.Genre.Find(id);
-            if (genre == null)
-            {
-                return HttpNotFound();
-            }
-            return View(genre);
-        }
 
-        // POST: Genres/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
             Genre genre = db.Genre.Find(id);
             db.Genre.Remove(genre);

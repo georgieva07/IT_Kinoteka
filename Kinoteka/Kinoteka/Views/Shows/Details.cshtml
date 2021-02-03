@@ -1,99 +1,111 @@
 ﻿@model Kinoteka.Models.Show
 
 @{
-	ViewBag.Title = "Details";
+    ViewBag.Title = "Details";
 }
 
 <h2>@Html.DisplayFor(model => model.title)</h2>
-
-<img src="@Model.image" style="max-width:200px">
+<br />
+<div class="row">
+    <div class="col-md-3">
+        <img src="@Model.image" style="max-width:200px">
+    </div>
+    <div class="col-md-9">
+        <br />
+        <b>@Html.DisplayNameFor(model => model.description)</b>
+        <br />
+        <div>
+            @Html.DisplayFor(model => model.description)
+        </div>
+        <br />
+        <div class="col-sm-4">
+            <b>@Html.DisplayNameFor(model => model.released_date)</b>
+        </div>
+        <div class="col">
+            <b>@Html.DisplayNameFor(model => model.rating)</b>
+        </div>
+        <div class="col-sm-4">
+            @Html.DisplayFor(model => model.released_date)
+        </div>
+        <div class="col">
+            @Html.DisplayFor(model => model.rating)
+        </div>
+    </div>
+</div>
 
 <div>
-	<hr />
-	<dl class="dl-horizontal">
+    <hr />
+    <dl class="dl-horizontal">
+        <br />
 
-		<dt>
-			@Html.DisplayNameFor(model => model.genres)
-		</dt>
-		<dd>
-			@foreach (var genre in Model.genres)
-			{
-				<a href="/Genres/Details/@genre.id">@genre.name </a>
-			}
-		</dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.play_link)
+        </dt>
 
-		<dt>
-			@Html.DisplayNameFor(model => model.directors)
-		</dt>
-		<dd>
-			@foreach (var director in Model.directors)
-			{
-				<a href="/Directors/Details/@director.id">@director.name </a>
-			}
-		</dd>
+        <dd>
+            <iframe width="560" height="315" src="@Model.play_link" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </dd>
 
-		<dt>
-			@Html.DisplayNameFor(model => model.cast)
-		</dt>
-		<dd>
-			@foreach (var actor in Model.cast)
-			{
-				<a href="/Actors/Details/@actor.id">@actor.name </a>
-			}
-			
-		</dd>
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.genres)
+        </dt>
+        <dd>
+            @foreach (var genre in Model.genres)
+        {
+            <a href="/Genres/Details/@genre.id">@genre.name </a>
+    }
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.directors)
+        </dt>
+        <dd>
+            @foreach (var director in Model.directors)
+        {
+            <a href="/Directors/Details/@director.id">@director.name </a>
+    }
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cast)
+        </dt>
+        <dd>
+            @foreach (var actor in Model.cast)
+        {
+            <a href="/Actors/Details/@actor.id">@actor.name </a>
+    }
+
+        </dd>
+
+        <br />
 
 
-		<dt>
-			@Html.DisplayNameFor(model => model.description)
-		</dt>
 
-		<dd>
-			@Html.DisplayFor(model => model.description)
-		</dd>
 
-		<dt>
-			@Html.DisplayNameFor(model => model.released_date)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor(model => model.released_date)
-		</dd>
-
-		<dt>
-			@Html.DisplayNameFor(model => model.rating)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor(model => model.rating)
-		</dd>
-
-		<dt>
-			@Html.DisplayNameFor(model => model.play_link)
-		</dt>
-
-		<dd>
-			<iframe width="560" height="315" src="@Model.play_link" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-		</dd>
-
-	</dl>
+    </dl>
 </div>
 <p>
-	@Html.ActionLink("Back to Movies List", "Index")
+    @Html.ActionLink("Back to Movies List", "Index")
 </p>
 @if (User.IsInRole("Administrator"))
 {
-	<div>
-		<hr />
-		<h4>Advanced Edition Options</h4>
-		<br>
-		<a href="/Shows/AddGenre/@Model.id">Add a genre</a><br>
-		<a href="/Shows/RemoveGenre/@Model.id">Remove a genre</a><br>
-		<a href="/Shows/AddDirector/@Model.id">Add a director</a><br>
-		<a href="/Shows/RemoveDirector/@Model.id">Remove a director</a><br>
-		<a href="/Shows/AddCastMember/@Model.id">Add a cast member</a><br>
-		<a href="/Shows/RemoveCastMember/@Model.id">Remove a cast member</a>
-		<hr />
-	</div>
+    <div>
+        <hr />
+        <h4>Advanced Edition Options</h4>
+        <br>
+        <a href="/Shows/AddGenre/@Model.id">Add a genre</a><br>
+        <a href="/Shows/RemoveGenre/@Model.id">Remove a genre</a><br>
+        <a href="/Shows/AddDirector/@Model.id">Add a director</a><br>
+        <a href="/Shows/RemoveDirector/@Model.id">Remove a director</a><br>
+        <a href="/Shows/AddCastMember/@Model.id">Add a cast member</a><br>
+        <a href="/Shows/RemoveCastMember/@Model.id">Remove a cast member</a>
+        <hr />
+    </div>
 }
 

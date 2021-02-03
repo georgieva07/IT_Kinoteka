@@ -10,10 +10,12 @@ using Kinoteka.Models;
 
 namespace Kinoteka.Controllers
 {
+    [Authorize(Roles = "Administrator,Editor")]
     public class ActorsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        [AllowAnonymous]
         // GET: Actors
         public ActionResult Index()
         {
@@ -90,24 +92,8 @@ namespace Kinoteka.Controllers
         }
 
         // GET: Actors/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Actor actor = db.Actors.Find(id);
-            if (actor == null)
-            {
-                return HttpNotFound();
-            }
-            return View(actor);
-        }
 
-        // POST: Actors/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
             Actor actor = db.Actors.Find(id);
             db.Actors.Remove(actor);

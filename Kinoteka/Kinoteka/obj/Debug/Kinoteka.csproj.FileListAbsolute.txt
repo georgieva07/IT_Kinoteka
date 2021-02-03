@@ -293,3 +293,4 @@ D:\FINKI\6. Sixth semester\IT\Project\Kinoteka\Kinoteka\Kinoteka\obj\Debug\Kinot
 D:\FINKI\6. Sixth semester\IT\Project\Kinoteka\Kinoteka\Kinoteka\obj\Debug\Kinoteka.dll
 D:\FINKI\6. Sixth semester\IT\Project\Kinoteka\Kinoteka\Kinoteka\obj\Debug\Kinoteka.pdb
 D:\FINKI\6. Sixth semester\IT\Project\Kinoteka\Kinoteka\Kinoteka\obj\Debug\Kinoteka.Migrations.final.resources
+D:\fax\IT\IT_Kinoteka\IT_Kinoteka\Kinoteka\Kinoteka\obj\Debug\Kinoteka.Migrations.final.resources
